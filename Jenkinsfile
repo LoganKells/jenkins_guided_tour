@@ -1,9 +1,7 @@
 // Jenkinsfile (Declarative Pipeline)
 pipeline {
     agent {
-        docker {
-            image 'python:3'
-        }
+        docker { image 'node:14-alpine' }
     }
     stages {
         stage('build') {
