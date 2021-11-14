@@ -34,14 +34,15 @@ pipeline {
                     // Install dependencies
                    sh "pip install --user -r requirements.txt"
                    // Run pytest
-                   sh 'python3 -m pytest ./test/test_math.py --junitxml=test_report.xml'
+                   sh 'python3 -m pytest ./test/test_math.py --junitxml=./build/test_report.xml'
                 }
             }
         }
     }
     post {
         always {
-            echo 'Completed'
+            // Record the test results
+            junit './build/test_report.xml'
         }
         success {
             echo 'Successful completion.'
