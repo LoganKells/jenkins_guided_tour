@@ -42,7 +42,7 @@ pipeline {
     post {
         always {
             // Record the test results
-            junit './build/test_report.xml'
+            junit 'build/test_report.xml'
         }
         success {
             echo 'Successful completion.'
