@@ -12,15 +12,15 @@ pipeline {
 //                 }
 //             }
 //         }
-        stage('dependencies') {
-            steps {
+//         stage('dependencies') {
+//             steps {
 //                 sh 'ls'
 //                 sh 'python3 -m venv ./venv'
 //                 sh 'ls ./venv/bin/'
 //                 sh '. ./venv/bin/activate'
-                sh 'python3 -m pip install -r requirements.txt'
-            }
-        }
+//                 sh 'python3 -m pip install -r requirements.txt'
+//             }
+//         }
         stage('build') {
             steps {
                 sh 'python3 --version'
@@ -28,7 +28,14 @@ pipeline {
         }
         stage('test') {
             steps {
-                sh 'pytest ./test/test_math.py --junitxml=test_report.xml'
+                // Install packages at the user level
+                // see - https://stackoverflow.com/a/54863788
+                withEnv(["HOME=${env.WORKSPACE}"]) {
+                    // Install dependencies
+                   sh "pip install -r requirements.txt --user"
+                   // Run pytest
+                   sh 'pytest ./test/test_math.py --junitxml=test_report.xml'
+                }
             }
         }
     }
