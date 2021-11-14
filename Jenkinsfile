@@ -4,15 +4,17 @@ pipeline {
         docker { image 'python:3' }
     }
     stages {
+        stage ('pull_from_scm') {
+            // We can run with credentials for git repo
+            withCredentials([gitUsernamePassword(credentialsId: 'github_logankells', gitToolName: 'Default')]) {
+                sh 'git pull'
+            }
+        }
         stage('build') {
             steps {
                 sh 'python3 --version'
             }
         }
-    }
-    // We can run with credentials for git repo
-    withCredentials([gitUsernamePassword(credentialsId: 'github_logankells', gitToolName: 'Default')]) {
-        sh 'git pull'
     }
     post {
         always {
