@@ -14,10 +14,10 @@ pipeline {
 //         }
         stage('dependencies') {
             steps {
-                sh 'ls'
-                sh 'python3 -m venv ./venv'
-                sh 'ls ./venv/bin/'
-                sh '. ./venv/bin/activate'
+//                 sh 'ls'
+//                 sh 'python3 -m venv ./venv'
+//                 sh 'ls ./venv/bin/'
+//                 sh '. ./venv/bin/activate'
                 sh 'python3 -m pip3 install -r requirements.txt'
             }
         }
