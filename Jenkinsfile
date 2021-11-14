@@ -32,9 +32,9 @@ pipeline {
                 // see - https://stackoverflow.com/a/54863788
                 withEnv(["HOME=${env.WORKSPACE}"]) {
                     // Install dependencies
-                   sh "pip install -r requirements.txt --user"
+                   sh "pip install --user -r requirements.txt"
                    // Run pytest
-                   sh 'pytest ./test/test_math.py --junitxml=test_report.xml'
+                   sh 'python3 -m pytest ./test/test_math.py --junitxml=test_report.xml'
                 }
             }
         }
@@ -48,6 +48,9 @@ pipeline {
         }
         failure {
             echo 'Failed completion.'
+        }
+        cleanup {
+            cleanWs()
         }
     }
 }
