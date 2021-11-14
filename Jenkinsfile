@@ -16,12 +16,9 @@ pipeline {
             steps {
                 sh 'ls'
                 sh 'python3 -m venv ./venv'
-                sh 'ls ./venv'
-//                 sh """
-//                     python3 -m venv ./venv
-//                     source ./venv/bin/activate
-//                     python3 -m pip install -r requirements.txt
-//                     """
+                sh 'ls ./venv/bin/'
+                sh 'source ./venv/bin/activate'
+                sh 'python3 -m pip install -r requirements.txt'
             }
         }
         stage('build') {
