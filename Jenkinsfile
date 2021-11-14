@@ -15,11 +15,16 @@ pipeline {
         stage('dependencies') {
             steps {
                 sh 'ls'
-                sh """
-                    python3 -m venv ./venv
-                    source ./venv/bin/activate
-                    python3 -m pip install -r requirements.txt
-                    """
+                sh 'python3 -m venv ./venv'
+                sh 'cd ./venv'
+                sh 'ls'
+                sh 'cd ~'
+                sh 'ls'
+//                 sh """
+//                     python3 -m venv ./venv
+//                     source ./venv/bin/activate
+//                     python3 -m pip install -r requirements.txt
+//                     """
             }
         }
         stage('build') {
