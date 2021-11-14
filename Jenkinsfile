@@ -5,9 +5,11 @@ pipeline {
     }
     stages {
         stage ('pull_from_scm') {
-            // We can run with credentials for git repo
-            withCredentials([gitUsernamePassword(credentialsId: 'github_logankells', gitToolName: 'Default')]) {
-                sh 'git pull'
+            steps {
+                // We can run with credentials for git repo
+                withCredentials([gitUsernamePassword(credentialsId: 'github_logankells', gitToolName: 'Default')]) {
+                    sh 'git pull'
+                }
             }
         }
         stage('build') {
