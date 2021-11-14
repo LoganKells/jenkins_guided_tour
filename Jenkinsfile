@@ -17,6 +17,11 @@ pipeline {
                 sh 'python3 --version'
             }
         }
+        stage('test') {
+            steps {
+                sh 'pytest ./test/test_math.py --junitxml=test_report.xml'
+            }
+        }
     }
     post {
         always {
